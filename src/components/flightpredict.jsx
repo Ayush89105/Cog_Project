@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Plane, MapPin, Clock, Wind, Cloud, AlertCircle, CheckCircle } from "lucide-react";
 import Background from "./Background";
 
+
 const EnhancedFlightPredict = () => {
   // 10 major airports with coordinates
   const airports = [
@@ -482,6 +483,7 @@ const EnhancedFlightPredict = () => {
     setPrediction(result);
 
     // ---- STEP 2: Call Groq API for top 3 features ----
+    console.log(process.env.REACT_APP_GROQ_API_KEY);
     const groqRes = await fetch(
       "https://api.groq.com/openai/v1/chat/completions",
       {
@@ -520,7 +522,7 @@ const EnhancedFlightPredict = () => {
     const groqData = await groqRes.json();
     console.log("Groq response:", groqData);
 
-    // ✅ Clean response
+    // ? Clean response
     let explanation =
       groqData.choices?.[0]?.message?.content?.trim() ||
       "No explanation available.";
