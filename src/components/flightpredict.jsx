@@ -767,30 +767,64 @@ const EnhancedFlightPredict = () => {
 
               {/* Other Form Fields */}
               {Object.entries(fieldConfig).map(([field, config]) => (
-                <div key={field}>
-                  <label className="block text-sm font-medium text-yellow-200 mb-2 flex items-center">
-                    {config.icon}
-                    <span className="ml-2">{field.replace(/_/g, " ")}</span>
-                    <span className="text-red-400 ml-1">*</span>
-                  </label>
-                  <input
-                    type={config.type}
-                    step={config.step}
-                    min={config.min}
-                    max={config.max}
-                    name={field}
-                    value={formData[field]}
-                    onChange={handleChange}
-                    placeholder={config.placeholder}
-                    className={`w-full px-4 py-2 bg-white/10 border border-white/20 rounded-xl text-white placeholder-yellow-100 focus:outline-none focus:border-orange-400 focus:bg-white/15 transition-all ${
-                      errors[field] ? 'border-red-400' : ''
-                    }`}
-                  />
-                  {errors[field] && (
-                    <p className="text-red-400 text-xs mt-1">{errors[field]}</p>
-                  )}
-                </div>
-              ))}
+  <div key={field}>
+    <label className="block text-sm font-medium text-yellow-200 mb-2 flex items-center">
+      {config.icon}
+      <span className="ml-2">{field.replace(/_/g, " ")}</span>
+      <span className="text-red-400 ml-1">*</span>
+    </label>
+
+    {field === "AIRLINE" ? (
+      <>
+        {/* Input with datalist suggestions */}
+        <input
+          list="airline-options"
+          name={field}
+          value={formData[field]}
+          onChange={handleChange}
+          placeholder="Select airline code"
+          className={`w-full px-4 py-2 bg-white/10 border border-white/20 rounded-xl text-white placeholder-yellow-100 focus:outline-none focus:border-orange-400 focus:bg-white/15 transition-all ${
+            errors[field] ? "border-red-400" : ""
+          }`}
+        />
+        <datalist id="airline-options">
+          <option value="UA" />
+          <option value="AA" />
+          <option value="US" />
+          <option value="F9" />
+          <option value="B6" />
+          <option value="OO" />
+          <option value="AS" />
+          <option value="NK" />
+          <option value="WN" />
+          <option value="DL" />
+          <option value="EV" />
+          <option value="HA" />
+          <option value="MQ" />
+          <option value="VX" />
+        </datalist>
+      </>
+    ) : (
+      <input
+        type={config.type}
+        step={config.step}
+        min={config.min}
+        max={config.max}
+        name={field}
+        value={formData[field]}
+        onChange={handleChange}
+        placeholder={config.placeholder}
+        className={`w-full px-4 py-2 bg-white/10 border border-white/20 rounded-xl text-white placeholder-yellow-100 focus:outline-none focus:border-orange-400 focus:bg-white/15 transition-all ${
+          errors[field] ? "border-red-400" : ""
+        }`}
+      />
+    )}
+
+    {errors[field] && (
+      <p className="text-red-400 text-xs mt-1">{errors[field]}</p>
+    )}
+  </div>
+))}
 
               {/* Weather Fields */}
               <div>

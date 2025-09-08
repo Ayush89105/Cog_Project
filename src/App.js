@@ -18,7 +18,7 @@ function App() {
       <span className="text-gray-100 text-sm font-bold">✈</span>
     </div>
     <span className="font-bold text-xl bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">
-      Udaan Smart Predict
+      SMART UDAAN PREDICTOR
     </span>
   </div>
 
